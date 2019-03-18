@@ -4,14 +4,14 @@ import java.util.*;
 
 public class PageRank {
 
-  /** Create 2D array 'path' for storing edges and array 'pagerank' for storing ranks  */
+  // Create 2D array 'path' for storing edges and array 'pagerank' for storing ranks
   public int path[][] = new int[10][10];
   public double pagerank[] = new double[10];
 
-  /** Core method with perform interative calculation of page ranks */
+  // Core method with perform interative calculation of page ranks
   public void calc(double totalNodes) {
     
-    /** Define variables and Damping Factor */
+    // Define variables and Damping Factor
     double InitialPageRank;
     double OutgoingLinks=0;
     double DampingFactor = 0.85;
@@ -21,26 +21,26 @@ public class PageRank {
     int k=1;
     int ITERATION_STEP=1;
 
-    /** Set initial ranks to 1/N */
+    // Set initial ranks to 1/N
     InitialPageRank = 1/totalNodes;
     System.out.printf(" Total Number of nodes: "+totalNodes+"\t Initial PageRank of All Nodes: "+InitialPageRank+"\n");
     for(k=1;k<=totalNodes;k++)
       {this.pagerank[k] = InitialPageRank;}
 
-    /** Print initial page ranks */
+    // Print initial page ranks
     System.out.printf("\n Initial PageRank Values, 0th Step \n");
     for(k=1;k<=totalNodes;k++)
       {System.out.printf("PageRank of "+k+" is :\t"+this.pagerank[k]+"\n");}
     
-    /** Define number of iterations */
+    // Define number of iterations
     while(ITERATION_STEP<=5) {
 
-      /** Store PageRank for all nodes in a temporary array */
+      // Store PageRank for all nodes in a temporary array
       for(k=1;k<=totalNodes;k++) {
           TempPageRank[k]=this.pagerank[k];
           this.pagerank[k]=0;
       }
-      /** Perform a single iteration; calculate updated page ranks*/
+      // Perform a single iteration; calculate updated page ranks
       for(InternalNodeNumber=1;InternalNodeNumber<=totalNodes;InternalNodeNumber++) {
         for(ExternalNodeNumber=1;ExternalNodeNumber<=totalNodes;ExternalNodeNumber++) {
           if(this.path[ExternalNodeNumber][InternalNodeNumber] == 1) {
@@ -57,21 +57,21 @@ public class PageRank {
         }
       }
 
-      /** Incorporate damping factor */
+      // Incorporate damping factor
       for(k=1;k<=totalNodes;k++) {
         this.pagerank[k]=(1-DampingFactor)+DampingFactor*this.pagerank[k];
       }
       
-      /** Display interim page ranks */
+      // Display interim page ranks
       System.out.printf("\n\tAfter Step "+ITERATION_STEP+"\n");
       for(k=1;k<=totalNodes;k++) {
         System.out.printf("Page Rank of "+k+" is :\t"+this.pagerank[k]+"\n");
       }
 
-      /** Increment interation step */
+      // Increment interation step
       ITERATION_STEP = ITERATION_STEP+1;
     }
-    /** Display final page ranks */
+    // Display final page ranks
     System.out.printf("\n\tFinal Page rank : \n");
     for(k=1;k<=totalNodes;k++) {
       System.out.printf("Page Rank of "+k+" is :\t"+this.pagerank[k]+"\n");
