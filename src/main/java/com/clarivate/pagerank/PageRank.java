@@ -8,7 +8,7 @@ public class PageRank {
   public int path[][] = new int[10][10];
   public double pagerank[] = new double[10];
 
-  // Core method with perform interative calculation of page ranks
+  // Core method to perform iterative calculation of page ranks
   public void calc(double totalNodes) {
     
     // Define variables and Damping Factor
